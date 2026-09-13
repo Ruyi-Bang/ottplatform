@@ -17,6 +17,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.17")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.apache.commons:commons-lang3")
@@ -37,4 +38,9 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+// Keep local credentials available to bootRun but out of distributed JARs.
+tasks.withType<Jar>().configureEach {
+    exclude("**/application-local.properties")
 }

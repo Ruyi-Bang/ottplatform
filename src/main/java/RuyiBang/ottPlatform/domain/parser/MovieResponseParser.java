@@ -17,8 +17,8 @@ public class MovieResponseParser {
         String[] lines = text.strip().split("\\R");
         String movie = null;
         String imdb = "Rating not available";
-        List<MovieSearchResponse.Item> available = new ArrayList<>();
-        List<MovieSearchResponse.Item> buyRent = new ArrayList<>();
+        List<MovieSearchResponse.platform> available = new ArrayList<>();
+        List<MovieSearchResponse.platform> buyRent = new ArrayList<>();
 
         enum Section { NONE, AVAILABLE, BUYRENT }
         Section section = Section.NONE;
@@ -58,7 +58,7 @@ public class MovieResponseParser {
                     String[] parts = entry.split("\\s*:\\s*", 2);
                     String platform = parts.length > 0 ? parts[0] : "";
                     String link = parts.length > 1 ? parts[1] : "";
-                    available.add(MovieSearchResponse.Item.builder()
+                    available.add(MovieSearchResponse.platform.builder()
                             .platform(platform)
                             .link(link)
                             .price("N/A")
@@ -68,7 +68,7 @@ public class MovieResponseParser {
                     String platform = parts.length > 0 ? parts[0] : "";
                     String link = parts.length > 1 ? parts[1] : "";
                     String price = parts.length > 2 ? parts[2] : "Price not available";
-                    buyRent.add(MovieSearchResponse.Item.builder()
+                    buyRent.add(MovieSearchResponse.platform.builder()
                             .platform(platform)
                             .link(link)
                             .price(price)

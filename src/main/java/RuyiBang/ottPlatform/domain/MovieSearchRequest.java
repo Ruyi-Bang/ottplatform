@@ -7,6 +7,7 @@ import lombok.*;
 public class MovieSearchRequest {
     @NotNull
     private String movieName;
-    private String language;
+    @Builder.Default
+    private String language = "any";
     private String country;
 }
